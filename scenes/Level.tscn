@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=6 format=3 uid="uid://wavwqkxu8swx"]
 
+[ext_resource type="Script" uid="uid://c3354xdut8i3c" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
 [ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
 [ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/ui.tscn" id="3_6vs76"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vs76"]
+
 [node name="Level" type="Node2D"]
+
+[node name="StatManager" type="Node" parent="."]
+script = ExtResource("1_kl8ac")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("1_uhqny")
@@ -13,9 +19,42 @@ ui = NodePath("../UI")
 [node name="GameTimer" type="Timer" parent="GameManager"]
 one_shot = true
 
-[node name="Numbers" type="Node" parent="."]
+[node name="MapBorder" type="Node2D" parent="."]
+
+[node name="LeftBorder" type="StaticBody2D" parent="MapBorder"]
+position = Vector2(26, -1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/LeftBorder"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_6vs76")
+
+[node name="RightBorder" type="StaticBody2D" parent="MapBorder"]
+position = Vector2(614, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/RightBorder"]
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_6vs76")
+
+[node name="TopBorder" type="StaticBody2D" parent="MapBorder"]
+position = Vector2(0, 38)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/TopBorder"]
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_6vs76")
+
+[node name="BottomBorder" type="StaticBody2D" parent="MapBorder"]
+position = Vector2(0, 434)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/BottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_6vs76")
 
 [node name="NumberManager" type="Node" parent="."]
 script = ExtResource("2_k5jlv")
 
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
+
+[connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_game_timer_timeout"]

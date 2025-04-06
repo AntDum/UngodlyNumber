@@ -34,6 +34,9 @@ func _finished_fade_in() -> void:
 	timer.start()
 	_transition()
 
+func _finished_fade_out() -> void:
+	_end_transition()
+
 func _on_timer_timeout() -> void:
 	animation_player.play("ripple_out")
-	_end_transition()
+	

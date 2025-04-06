@@ -20,7 +20,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
-text = "30.5 s"
+text = "30 s"
 horizontal_alignment = 1
 
 [node name="TimerPb" type="ProgressBar" parent="HBoxContainer"]
@@ -30,7 +30,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 4.0
-value = 8.88
+value = 100.0
 show_percentage = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
@@ -58,7 +58,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ScoreLabel" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "75642"
+text = "0"
 script = ExtResource("2_yev5y")
 metadata/_custom_type_script = "uid://b12rg5o8m1w70"
 
