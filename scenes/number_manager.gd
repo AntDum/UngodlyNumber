@@ -2,8 +2,9 @@ extends Node
 class_name NumberManager
 
 var NumberScn = preload("res://scenes/number.tscn")
-@onready var stat_manager: Node = $"../StatManager"
 @onready var ui: UI = $"../UI"
+
+var current_ungodly
 
 var round_number = 0
 
@@ -21,9 +22,9 @@ const ungodly_candidates = [2, 3, 5, 7, 11, 13, 17]
 
 func _on_new_round():
 	round_number += 1
-	var ungodly = ungodly_candidates.pick_random()
-	build_numbers(round_number, 1, ungodly)
-	ui.set_impie(ungodly)
+	current_ungodly = ungodly_candidates.pick_random()
+	build_numbers(round_number, 1, current_ungodly)
+	ui.set_impie(current_ungodly)
 
 var rng = RandomNumberGenerator.new()
 
@@ -36,8 +37,10 @@ func _on_split(number: Number):
 	
 	var pivot = rng.randi_range(1, prime_factor_array.size()-1)
 	print("Pivot on %s (%s)" % [pivot, prime_factor_array])
-	childA.from_factors(prime_factor_array.slice(0, pivot))
-	childB.from_factors(prime_factor_array.slice(pivot))
+	var childA_factors = prime_factor_array.slice(0, pivot)
+	var childB_factors = prime_factor_array.slice(pivot)
+	childA.from_factors(childA_factors, current_ungodly in childA_factors)
+	childB.from_factors(childB_factors, current_ungodly in childB_factors)
 	
 	print("Generated %s and %s from %s" % [childA.value, childB.value, number.value])
 

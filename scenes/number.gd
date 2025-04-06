@@ -120,7 +120,8 @@ func randomize_to_godly(max: int, ungodly: int):
 	
 
 
-func from_factors(factors: Array):
+func from_factors(factors: Array, is_ungodly: bool):
+	self.is_ungodly = is_ungodly
 	value = 1
 	for f in factors:
 		value *= f
