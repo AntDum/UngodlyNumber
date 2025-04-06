@@ -6,7 +6,7 @@ var NumberScn = preload("res://scenes/number.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Temporarly automatically creates numbers.
-	build_numbers(20)
+	build_numbers(1)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,8 +30,10 @@ func split(number: Number):
 
 	add_child(childA)
 	add_child(childB)
-	childA.global_position.x = number.global_position.x + 100
-	childB.global_position.y = number.global_position.x - 100
+	childA.global_position.x = number.global_position.x + 35
+	childA.global_position.y = number.global_position.y
+	childB.global_position.x = number.global_position.x - 35
+	childB.global_position.y = number.global_position.y
 	
 	number.queue_free()
 
@@ -39,7 +41,10 @@ func build_numbers(amount: int) -> void:
 	for i in amount:
 		var newNum = NumberScn.instantiate()
 		newNum.randomize_value(500)
+		
 		add_child(newNum)
 		newNum.global_position.x = 100 #TODO randomize spawn position.
 		newNum.global_position.y = 100
+		
+		split(newNum)
 		
