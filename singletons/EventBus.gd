@@ -1,6 +1,7 @@
 extends Node
 
 signal selected(number : Number)
+signal split(number: Number)
 signal kill
 
 signal round_started

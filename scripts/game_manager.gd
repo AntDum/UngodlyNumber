@@ -60,7 +60,11 @@ func _on_kill_number() -> void:
 		won_round()
 
 func _on_number_selected(number : Number) -> void:
-	pass
+	if selected == number:
+		EventBus.split.emit(number)
+	else:
+		print("New selection : ", number.value)
+		selected = number
 
 func _setter_score(value) -> void:
 	score = value
