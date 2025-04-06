@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=8 format=3 uid="uid://c7hh264r55r2i"]
 
-[ext_resource type="Script" uid="uid://c3354xdut8i3c" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
+[ext_resource type="Script" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
 [ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
-[ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/ui.tscn" id="3_6vs76"]
+[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_6vs76"]
+[ext_resource type="AudioStream" uid="uid://mqjwxvkjgw3u" path="res://assets/best-game-console-301284.mp3" id="4_dke22"]
 [ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vs76"]
@@ -26,6 +27,10 @@ ui = NodePath("../UI")
 
 [node name="GameTimer" type="Timer" parent="GameManager"]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("4_dke22")
+autoplay = true
 
 [node name="MapBorder" type="Node2D" parent="."]
 
