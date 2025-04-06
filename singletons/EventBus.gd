@@ -4,6 +4,9 @@ signal selected(number : Number)
 signal split(number: Number)
 signal kill
 
+signal lost
+signal retry
+
 signal round_started
 signal round_ended
 signal game_started

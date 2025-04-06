@@ -1,4 +1,5 @@
 extends Node
+class_name StatManager
 
 var killed = 0
 var ungodly_killed = 0

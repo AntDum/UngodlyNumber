@@ -1,6 +1,7 @@
 extends Node
+class_name GameManager
 
-@export var game_time : float = 30
+@export var game_time : float = 10
 
 @export var ui : UI
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 	SceneManager.end_transition.connect(start_game)
 	EventBus.selected.connect(_on_number_selected)
 	EventBus.kill.connect(_on_kill_number)
+	EventBus.retry.connect(start_game)
 
 func _process(delta: float) -> void:
 	if ui:
@@ -31,7 +33,9 @@ func start_round() -> void:
 
 func end_round() -> void:
 	is_round_running = false
+	score += roundf(game_timer.time_left) * 10
 	game_timer.stop()
+	kill_all_number()
 
 func won_round() -> void:
 	end_round()
@@ -39,7 +43,7 @@ func won_round() -> void:
 
 func lost_round() -> void:
 	end_round()
-	print("Lost round")
+	EventBus.lost.emit()
 
 func clear_game() -> void:
 	game_timer.stop()
@@ -63,7 +67,7 @@ func _on_kill_number() -> void:
 	else:
 		score -= 50
 	selected.queue_free()
-	if remaining_ungodly() == 0:
+	if remaining_ungodly() <= 1:
 		won_round()
 
 func _on_number_selected(number : Number) -> void:
