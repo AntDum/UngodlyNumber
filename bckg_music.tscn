@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs27eau3102ah"]
+
+[ext_resource type="AudioStream" uid="uid://mqjwxvkjgw3u" path="res://assets/best-game-console-301284.mp3" id="1_o3y60"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_o3y60")
+autoplay = true

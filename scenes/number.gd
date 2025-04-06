@@ -73,9 +73,12 @@ func randomize_to_ungodly(max: int, ungodly : int):
 	
 	var keep_growing = true
 	
+	var current_primes = raw_primes.duplicate()
+	current_primes.erase(ungodly)
+	
 	while keep_growing:
 		var i = rng.rand_weighted(prime_weight)
-		var new_prime = raw_primes[i]
+		var new_prime = current_primes[i]
 		if new_prime * value < max:
 			value *= new_prime
 			prime_factors.append(new_prime)
@@ -98,9 +101,12 @@ func randomize_to_godly(max: int, ungodly: int):
 	
 	var keep_growing = true
 	
+	var current_primes = raw_primes.duplicate()
+	current_primes.erase(ungodly)
+	
 	while keep_growing:
 		var i = rng.rand_weighted(prime_weight)
-		var new_prime = raw_primes[i]
+		var new_prime = current_primes[i]
 		if new_prime * value < max:
 			value *= new_prime
 			prime_factors.append(new_prime)
