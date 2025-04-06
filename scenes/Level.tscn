@@ -41,6 +41,7 @@ bus = &"SFX"
 
 [node name="RoundLostSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("6_ax7ne")
+volume_db = -13.929
 bus = &"SFX"
 
 [node name="OnKillSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
