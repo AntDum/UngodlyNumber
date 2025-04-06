@@ -2,7 +2,7 @@ extends Node
 class_name NumberManager
 
 var NumberScn = preload("res://scenes/number.tscn")
-@onready var ui: UI = $"../UI"
+@export var ui : UI
 
 var current_ungodly
 

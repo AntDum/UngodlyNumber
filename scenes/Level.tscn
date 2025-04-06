@@ -28,6 +28,7 @@ script = ExtResource("1_kl8ac")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("1_uhqny")
+game_time = 7.0
 ui = NodePath("../UI")
 
 [node name="GameTimer" type="Timer" parent="GameManager"]
@@ -35,12 +36,17 @@ one_shot = true
 
 [node name="RoundWonSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("5_2eouu")
+volume_db = -14.857
+bus = &"SFX"
 
 [node name="RoundLostSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("6_ax7ne")
+bus = &"SFX"
 
 [node name="OnKillSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("6_rccsh")
+volume_db = -8.099
+bus = &"SFX"
 
 [node name="MapBorder" type="Node2D" parent="."]
 
@@ -75,16 +81,19 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/BottomBorder"]
 shape = SubResource("WorldBoundaryShape2D_6vs76")
 
-[node name="NumberManager" type="Node" parent="."]
+[node name="NumberManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("2_k5jlv")
+ui = NodePath("../UI")
 
 [node name="SplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
 stream = ExtResource("6_4qegb")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="NotSplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
 stream = ExtResource("7_faw0r")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
 

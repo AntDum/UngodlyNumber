@@ -42,7 +42,7 @@ theme_override_constants/separation = 80
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "SuperTitle !"
+text = "Number Chalk"
 label_settings = SubResource("LabelSettings_70654")
 
 [node name="Button" type="Button" parent="VBoxContainer"]

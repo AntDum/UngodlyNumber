@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 
 func start_game() -> void:
 	EventBus.game_started.emit()
+	score = 0
 	start_round()
 
 func start_round() -> void:
@@ -63,14 +64,18 @@ func remaining_ungodly() -> int:
 
 func _on_kill_number() -> void:
 	$OnKillSoundPlayer.play()
+	var remaining_ungodly = remaining_ungodly()
+	print(remaining_ungodly)
 	if not is_round_running: return
 	EventBus.number_killed.emit(not selected.is_ungodly)
 	if selected.is_ungodly:
 		score += 100
+		remaining_ungodly -= 1
 	else:
 		score -= 50
 	selected.queue_free()
-	if remaining_ungodly() <= 1:
+	prints("now",remaining_ungodly)
+	if remaining_ungodly == 0:
 		won_round()
 
 func _on_number_selected(number : Number) -> void:

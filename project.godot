@@ -33,7 +33,10 @@ numbers="Les noeuds qui sont des nombres"
 
 [gui]
 
+theme/custom="uid://bsg7nmbq2yry8"
 theme/custom_font="uid://pn8clwulnp74"
+theme/default_font_antialiasing=0
+theme/default_font_subpixel_positioning=0
 
 [rendering]
 
