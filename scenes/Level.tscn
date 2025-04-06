@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=3 format=3 uid="uid://c7hh264r55r2i"]
+
+[ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="1_uhqny"]
+[ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
 
 [node name="Level" type="Node2D"]
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uhqny")
+
+[node name="NumberManager" type="Node" parent="."]
+script = ExtResource("2_k5jlv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
