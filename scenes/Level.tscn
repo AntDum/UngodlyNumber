@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7hh264r55r2i"]
+[gd_scene load_steps=9 format=3 uid="uid://c7hh264r55r2i"]
 
 [ext_resource type="Script" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_6vs76"]
 [ext_resource type="AudioStream" uid="uid://mqjwxvkjgw3u" path="res://assets/best-game-console-301284.mp3" id="4_dke22"]
 [ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
+[ext_resource type="AudioStream" uid="uid://7yj38ft28w0y" path="res://assets/switch6.ogg" id="6_4qegb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vs76"]
 
@@ -67,6 +68,10 @@ shape = SubResource("WorldBoundaryShape2D_6vs76")
 
 [node name="NumberManager" type="Node" parent="."]
 script = ExtResource("2_k5jlv")
+
+[node name="SplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
+stream = ExtResource("6_4qegb")
+volume_db = -4.0
 
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
 

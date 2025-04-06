@@ -29,6 +29,7 @@ func _on_new_round():
 var rng = RandomNumberGenerator.new()
 
 func _on_split(number: Number):
+	$SplitSoundPlayer.play()
 	var prime_factor_array = number.prime_factors.duplicate()
 	if(prime_factor_array.size() == 1): return
 	prime_factor_array.shuffle()
