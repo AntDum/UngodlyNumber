@@ -10,6 +10,9 @@ script = ExtResource("1_uhqny")
 
 [node name="Numbers" type="Node" parent="."]
 
+[node name="NumberManager" type="Node" parent="."]
+script = ExtResource("2_k5jlv")
+
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_k5jlv")
 
