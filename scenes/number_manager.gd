@@ -4,21 +4,22 @@ class_name NumberManager
 var NumberScn = preload("res://scenes/number.tscn")
 @export var ui : UI
 
-var current_ungodly
+const ungodly_candidates = [2, 3, 5, 7, 11, 13, 17]
+var current_ungodly : int
 
 var round_number = 0
 
-# Called when the node enters the scene tree for the first time.
+var rng = RandomNumberGenerator.new()
+@onready var top_left: Node2D = $TopLeft
+@onready var bottom_right: Node2D = $BottomRight
+
 func _ready() -> void:
 	EventBus.split.connect(_on_split)
 	EventBus.round_started.connect(_on_new_round)
+	EventBus.game_started.connect(_on_game_started)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-const ungodly_candidates = [2, 3, 5, 7, 11, 13, 17]
+func _on_game_started():
+	round_number = 0
 
 func _on_new_round():
 	round_number += 1
@@ -26,7 +27,6 @@ func _on_new_round():
 	build_numbers(round_number, 1, current_ungodly)
 	ui.set_impie(current_ungodly)
 
-var rng = RandomNumberGenerator.new()
 
 func _on_split(number: Number):
 	var prime_factor_array = number.prime_factors.duplicate()
@@ -62,14 +62,15 @@ func build_numbers(amount_of_godly: int, amount_of_ungodly: int, ungodly_number:
 		var newNum = NumberScn.instantiate()
 		newNum.randomize_to_godly(500, ungodly_number)
 		
-		add_child(newNum)
-		newNum.global_position.x = rng.randi_range(0,1000) #TODO randomize spawn position.
-		newNum.global_position.y = 100 + i * 150
+		_add_child_random(newNum)
 	
 	for i in amount_of_ungodly:
 		var newNum = NumberScn.instantiate()
 		newNum.randomize_to_ungodly(500, ungodly_number)
 		
-		add_child(newNum)
-		newNum.global_position.x = rng.randi_range(0,1000) #TODO randomize spawn position.
-		newNum.global_position.y = 100 + (i+amount_of_godly) * 150
+		_add_child_random(newNum)
+
+func _add_child_random(node: Node2D) -> void:
+	add_child(node)
+	node.global_position.x = rng.randf_range(top_left.global_position.x, bottom_right.global_position.x)
+	node.global_position.y = rng.randf_range(top_left.global_position.y, bottom_right.global_position.y)

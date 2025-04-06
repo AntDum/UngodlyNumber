@@ -63,10 +63,10 @@ func remaining_ungodly() -> int:
 	return tot
 
 func _on_kill_number() -> void:
+	if not is_round_running: return
+	if not selected: return
 	$OnKillSoundPlayer.play()
 	var remaining_ungodly = remaining_ungodly()
-	print(remaining_ungodly)
-	if not is_round_running: return
 	EventBus.number_killed.emit(not selected.is_ungodly)
 	if selected.is_ungodly:
 		score += 100
@@ -74,7 +74,7 @@ func _on_kill_number() -> void:
 	else:
 		score -= 50
 	selected.queue_free()
-	prints("now",remaining_ungodly)
+	selected = null
 	if remaining_ungodly == 0:
 		won_round()
 

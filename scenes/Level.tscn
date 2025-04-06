@@ -96,6 +96,12 @@ stream = ExtResource("7_faw0r")
 volume_db = -4.0
 bus = &"SFX"
 
+[node name="TopLeft" type="Node2D" parent="NumberManager"]
+position = Vector2(74, 83)
+
+[node name="BottomRight" type="Node2D" parent="NumberManager"]
+position = Vector2(549, 360)
+
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
 
 [node name="Lost" parent="." node_paths=PackedStringArray("stat_manager", "game_manager") instance=ExtResource("6_dke22")]

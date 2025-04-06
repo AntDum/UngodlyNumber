@@ -61,6 +61,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ScoreLabel" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "0"
 script = ExtResource("2_yev5y")
 metadata/_custom_type_script = "uid://b12rg5o8m1w70"
