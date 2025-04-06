@@ -6,7 +6,7 @@ extends Node
 
 @onready var game_timer: Timer = $GameTimer
 
-var is_round_started = true
+var is_round_running = false
 var selected : Number = null
 
 var score : int = 0: set = _setter_score
@@ -22,16 +22,20 @@ func _process(delta: float) -> void:
 
 func start_game() -> void:
 	EventBus.game_started.emit()
+	start_round()
 
 func start_round() -> void:
 	EventBus.round_started.emit()
 	game_timer.start(game_time)
+	is_round_running = true
 
 func won_round() -> void:
+	is_round_running = false
 	print("Won round")
 	pass
 
 func lost_round() -> void:
+	is_round_running = false
 	print("Lost round")
 	pass
 
@@ -50,6 +54,7 @@ func remaining_ungodly() -> int:
 	return tot
 
 func _on_kill_number() -> void:
+	if not is_round_running: return
 	EventBus.number_killed.emit(not selected.is_ungodly)
 	if selected.is_ungodly:
 		score += 100
@@ -60,6 +65,7 @@ func _on_kill_number() -> void:
 		won_round()
 
 func _on_number_selected(number : Number) -> void:
+	if not is_round_running: return
 	if selected == number:
 		EventBus.split.emit(number)
 	else:

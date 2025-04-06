@@ -17,3 +17,6 @@ func set_score(value: int) -> void:
 
 func set_impie(value: int) -> void:
 	impie_label.text = impie_text % value
+
+func _on_button_pressed() -> void:
+	EventBus.kill.emit()
