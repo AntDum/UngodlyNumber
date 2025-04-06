@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=4 format=3 uid="uid://c7hh264r55r2i"]
 
-[ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
-[ext_resource type="Script" uid="uid://phj4j4mi5ipa" path="res://scripts/ui.gd" id="2_k5jlv"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_uhqny"]
+[ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="3_6vs76"]
 
 [node name="Level" type="Node2D"]
 
@@ -14,7 +15,7 @@ script = ExtResource("1_uhqny")
 script = ExtResource("2_k5jlv")
 
 [node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("2_k5jlv")
+script = ExtResource("3_6vs76")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchors_preset = 12
