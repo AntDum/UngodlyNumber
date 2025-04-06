@@ -2,16 +2,28 @@ extends Node
 class_name NumberManager
 
 var NumberScn = preload("res://scenes/number.tscn")
+@onready var stat_manager: Node = $"../StatManager"
+@onready var ui: UI = $"../UI"
+
+var round_number = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBus.split.connect(_on_split)
-	build_numbers(2, 4, 3)
-	pass # Replace with function body.
+	EventBus.round_started.connect(_on_new_round)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+const ungodly_candidates = [2, 3, 5, 7, 11, 13, 17]
+
+func _on_new_round():
+	round_number += 1
+	var ungodly = ungodly_candidates.pick_random()
+	build_numbers(round_number, 1, ungodly)
+	ui.set_impie(ungodly)
 
 var rng = RandomNumberGenerator.new()
 
