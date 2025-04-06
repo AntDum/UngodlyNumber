@@ -34,10 +34,12 @@ func end_round() -> void:
 	game_timer.stop()
 
 func won_round() -> void:
+	$RoundWonSoundPlayer.play()
 	end_round()
 	start_round()
 
 func lost_round() -> void:
+	$RoundLostSoundPlayer.play()
 	end_round()
 	print("Lost round")
 
@@ -56,6 +58,7 @@ func remaining_ungodly() -> int:
 	return tot
 
 func _on_kill_number() -> void:
+	$OnKillSoundPlayer.play()
 	if not is_round_running: return
 	EventBus.number_killed.emit(not selected.is_ungodly)
 	if selected.is_ungodly:

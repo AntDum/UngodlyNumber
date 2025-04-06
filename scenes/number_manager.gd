@@ -29,9 +29,12 @@ func _on_new_round():
 var rng = RandomNumberGenerator.new()
 
 func _on_split(number: Number):
-	$SplitSoundPlayer.play()
 	var prime_factor_array = number.prime_factors.duplicate()
-	if(prime_factor_array.size() == 1): return
+	if(prime_factor_array.size() == 1): 
+		$NotSplitSoundPlayer.play()
+		return
+	$SplitSoundPlayer.play()
+
 	prime_factor_array.shuffle()
 	var childA = NumberScn.instantiate()
 	var childB = NumberScn.instantiate()

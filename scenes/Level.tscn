@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7hh264r55r2i"]
+[gd_scene load_steps=13 format=3 uid="uid://c7hh264r55r2i"]
 
 [ext_resource type="Script" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
 [ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
 [ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_6vs76"]
 [ext_resource type="AudioStream" uid="uid://mqjwxvkjgw3u" path="res://assets/best-game-console-301284.mp3" id="4_dke22"]
+[ext_resource type="AudioStream" uid="uid://bpfa6hrt8agd7" path="res://assets/win.wav" id="5_2eouu"]
 [ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
-[ext_resource type="AudioStream" uid="uid://7yj38ft28w0y" path="res://assets/switch6.ogg" id="6_4qegb"]
+[ext_resource type="AudioStream" uid="uid://dy3mwxathtykb" path="res://assets/splitted.wav" id="6_4qegb"]
+[ext_resource type="AudioStream" uid="uid://djac6np0lv31f" path="res://assets/gameover.wav" id="6_ax7ne"]
+[ext_resource type="AudioStream" uid="uid://dvla4otnh4757" path="res://assets/kill.wav" id="6_rccsh"]
+[ext_resource type="AudioStream" uid="uid://bx26xpgesrpte" path="res://assets/notSplittable.wav" id="7_faw0r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vs76"]
 
@@ -32,6 +36,15 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("4_dke22")
 autoplay = true
+
+[node name="RoundWonSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("5_2eouu")
+
+[node name="RoundLostSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("6_ax7ne")
+
+[node name="OnKillSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("6_rccsh")
 
 [node name="MapBorder" type="Node2D" parent="."]
 
@@ -71,6 +84,10 @@ script = ExtResource("2_k5jlv")
 
 [node name="SplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
 stream = ExtResource("6_4qegb")
+volume_db = -4.0
+
+[node name="NotSplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
+stream = ExtResource("7_faw0r")
 volume_db = -4.0
 
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
