@@ -1,5 +1,8 @@
 extends Node
 
+signal round_started
+signal round_ended
+
 @export var game_time : float = 30
 
 @export var ui : UI
@@ -11,14 +14,15 @@ var selected : Number = null
 var score : int = 0: set = _setter_score
 
 func _ready() -> void:
+	SceneManager.end_transition.connect(start_game)
 	EventBus.selected.connect(_on_number_selected)
-	start_game()
 
 func _process(delta: float) -> void:
 	if ui:
 		ui.set_time(game_timer.time_left, game_time) 
 
 func start_game() -> void:
+	round_started.emit()
 	game_timer.start(game_time)
 
 func clear_game() -> void:
