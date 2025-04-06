@@ -29,15 +29,17 @@ func start_round() -> void:
 	game_timer.start(game_time)
 	is_round_running = true
 
-func won_round() -> void:
+func end_round() -> void:
 	is_round_running = false
-	print("Won round")
-	pass
+	game_timer.stop()
+
+func won_round() -> void:
+	end_round()
+	start_round()
 
 func lost_round() -> void:
-	is_round_running = false
+	end_round()
 	print("Lost round")
-	pass
 
 func clear_game() -> void:
 	game_timer.stop()
