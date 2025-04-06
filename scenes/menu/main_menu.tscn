@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlipchs0t7sd6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_70654"]
+font_size = 36
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.208
+anchor_right = 0.653
+anchor_bottom = 0.312
+offset_left = -0.0800018
+offset_top = 0.159996
+offset_right = 0.0799561
+offset_bottom = 0.23999
+grow_horizontal = 2
+grow_vertical = 2
+text = "SuperTitle !"
+label_settings = SubResource("LabelSettings_70654")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.506
+anchor_right = 0.625
+anchor_bottom = 0.673
+offset_left = -1.52588e-05
+offset_top = 0.11998
+offset_bottom = -0.0400085
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
