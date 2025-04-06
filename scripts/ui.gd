@@ -1,11 +1,19 @@
 extends CanvasLayer
+class_name UI
 
+@export var impie_text : String = "Kill the %d"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var timer_label: Label = %TimerLabel
+@onready var timer_pb: ProgressBar = %TimerPb
+@onready var score_label: AnimatedLabel = %ScoreLabel
+@onready var impie_label: Label = %ImpieLabel
 
+func set_time(current: float, max: float) -> void:
+	timer_label.text = "%s s" % str(roundf(current * 10) / 10)
+	timer_pb.value = ((current / max) * 100)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func set_score(value: int) -> void:
+	score_label.set_value(value)
+
+func set_impie(value: int) -> void:
+	impie_label.text = impie_text % value

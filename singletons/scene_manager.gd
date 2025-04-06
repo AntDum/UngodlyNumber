@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+signal begin_transition
+signal end_transition
+
 @export var dead_time : float = 0.2 
 var _currently_loading : bool = false
 var _scene_to_load : String = ""
@@ -15,6 +18,7 @@ func swap_scene(to: String) -> void:
 
 func _start_transition() -> void:
 	_currently_loading = true
+	begin_transition.emit()
 	animation_player.play("ripple_in")
 	
 func _transition() -> void:
@@ -22,6 +26,7 @@ func _transition() -> void:
 
 func _end_transition() -> void:
 	_currently_loading = false
+	end_transition.emit()
 
 func _finished_fade_in() -> void:
 	timer.wait_time = dead_time
