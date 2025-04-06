@@ -27,6 +27,7 @@ func _finished_fade_in() -> void:
 	timer.wait_time = dead_time
 	timer.one_shot = true
 	timer.start()
+	_transition()
 
 func _on_timer_timeout() -> void:
 	animation_player.play("ripple_out")

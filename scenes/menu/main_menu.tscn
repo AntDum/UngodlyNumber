@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlipchs0t7sd6"]
+[gd_scene load_steps=4 format=3 uid="uid://dlipchs0t7sd6"]
 
 [ext_resource type="Script" uid="uid://cpyy8eohc5fxq" path="res://scripts/main_menu.gd" id="1_nl8w3"]
+[ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="2_3rkf3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_70654"]
 font_size = 36
@@ -14,35 +15,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nl8w3")
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.347
-anchor_top = 0.208
-anchor_right = 0.653
-anchor_bottom = 0.312
-offset_left = -0.0800018
-offset_top = 0.159996
-offset_right = 0.0799561
-offset_bottom = 0.23999
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_3rkf3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -67.0
+offset_right = 98.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 text = "SuperTitle !"
 label_settings = SubResource("LabelSettings_70654")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(160, 80)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.375
-anchor_top = 0.506
-anchor_right = 0.625
-anchor_bottom = 0.673
-offset_left = -1.52588e-05
-offset_top = 0.11998
-offset_bottom = -0.0400085
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "Play"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

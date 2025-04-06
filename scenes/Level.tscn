@@ -1,3 +1,67 @@
-[gd_scene format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=3 format=3 uid="uid://wavwqkxu8swx"]
+
+[ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
+[ext_resource type="Script" uid="uid://phj4j4mi5ipa" path="res://scripts/ui.gd" id="2_k5jlv"]
 
 [node name="Level" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_uhqny")
+
+[node name="Numbers" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("2_k5jlv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TimerLabel" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "30.5 s"
+horizontal_alignment = 1
+
+[node name="TimerPb" type="ProgressBar" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.0
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="UI/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kill"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScoreLabel" type="Label" parent="UI/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "75642"
