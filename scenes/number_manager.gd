@@ -19,5 +19,5 @@ func build_numbers(amount: int) -> void:
 		var newNum = NumberScn.instantiate()
 		newNum.randomize_value(100)
 		add_child(newNum)
-		newNum.global_position.x = (i/5) * 100
+		newNum.global_position.x = (i/5) * 100 #TODO randomize spawn position.
 		newNum.global_position.y = 100 * (i%5)

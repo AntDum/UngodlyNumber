@@ -1,23 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cskfa5ihbuu4g"]
+[gd_scene load_steps=4 format=3 uid="uid://cskfa5ihbuu4g"]
 
 [ext_resource type="Script" uid="uid://dls66jxadmxj1" path="res://scenes/number.gd" id="1_1u5is"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctckn"]
 radius = 57.0
-
-[sub_resource type="GDScript" id="GDScript_1u5is"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u5is"]
 
@@ -38,7 +24,6 @@ theme_override_font_sizes/font_size = 50
 text = "43"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = SubResource("GDScript_1u5is")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1u5is")
