@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name UI
 
-@export var impie_text : String = "Kill the %d"
+@export var impie_text : String = "Erase the %d"
 
 @onready var timer_label: Label = %TimerLabel
 @onready var timer_pb: ProgressBar = %TimerPb

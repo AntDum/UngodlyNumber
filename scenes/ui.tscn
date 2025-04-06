@@ -48,7 +48,7 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Kill"
+text = "Erase"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 40.0
@@ -80,7 +80,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ImpieLabel" type="Label" parent="MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Kill the 7"
+text = "Erase the 7"
 label_settings = SubResource("LabelSettings_x4jx1")
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
