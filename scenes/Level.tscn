@@ -1,14 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7hh264r55r2i"]
+[gd_scene load_steps=13 format=3 uid="uid://wavwqkxu8swx"]
 
-[ext_resource type="Script" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
+[ext_resource type="Script" uid="uid://c3354xdut8i3c" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
 [ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
-[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_6vs76"]
+[ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/ui.tscn" id="3_6vs76"]
 [ext_resource type="AudioStream" uid="uid://bpfa6hrt8agd7" path="res://assets/win.wav" id="5_2eouu"]
 [ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
-[ext_resource type="PackedScene" uid="uid://dqvfsjv00h1fk" path="res://scenes/lost.tscn" id="6_dke22"]
 [ext_resource type="AudioStream" uid="uid://dy3mwxathtykb" path="res://assets/splitted.wav" id="6_4qegb"]
 [ext_resource type="AudioStream" uid="uid://djac6np0lv31f" path="res://assets/gameover.wav" id="6_ax7ne"]
+[ext_resource type="PackedScene" uid="uid://dqvfsjv00h1fk" path="res://scenes/lost.tscn" id="6_dke22"]
 [ext_resource type="AudioStream" uid="uid://dvla4otnh4757" path="res://assets/kill.wav" id="6_rccsh"]
 [ext_resource type="AudioStream" uid="uid://bx26xpgesrpte" path="res://assets/notSplittable.wav" id="7_faw0r"]
 

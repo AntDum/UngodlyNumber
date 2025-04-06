@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 EventBus="*res://singletons/EventBus.tscn"
 SceneManager="*res://singletons/SceneManager.tscn"
-BckgMusic="*res://bckg_music.tscn"
+BckgMusic="*res://singletons/bckg_music.tscn"
 
 [display]
 
