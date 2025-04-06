@@ -17,6 +17,8 @@ var rng = RandomNumberGenerator.new()
 
 func randomize_value(max: int):
 	value = rng.randi_range(2,max)
+	
+	# Identify prime factors
 	var reduced_value = value
 	var i = 0
 	while reduced_value != 1 and reduced_value >= raw_primes[i]:
@@ -25,10 +27,20 @@ func randomize_value(max: int):
 			reduced_value = int(reduced_value / raw_primes[i])
 		else:
 			i += 1
+			
+	#Set value label text.
 	$Value.text = str(value)
+	
+	#Small sanity check
 	var sanity_check = 1
 	for f in prime_factors:
 		sanity_check *= f
-	print("Sanity check : ", sanity_check == value)
+	assert(sanity_check == value, "ERROR on value generation")
 	
-	
+
+
+func from_factors(factors: Array):
+	value = 1
+	for f in factors:
+		value *= f
+		prime_factors.append(f)
