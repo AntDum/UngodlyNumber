@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cskfa5ihbuu4g"]
+[gd_scene load_steps=5 format=3 uid="uid://cskfa5ihbuu4g"]
 
 [ext_resource type="Script" uid="uid://dls66jxadmxj1" path="res://scenes/number.gd" id="1_1u5is"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctckn"]
-radius = 57.0
+radius = 35.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1u5is"]
+font_size = 50
+outline_color = Color(0.105882, 0.643137, 0.239216, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u5is"]
 
@@ -22,8 +26,11 @@ offset_right = 172.0
 offset_bottom = 45.0
 theme_override_font_sizes/font_size = 50
 text = "43"
+label_settings = SubResource("LabelSettings_1u5is")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1u5is")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

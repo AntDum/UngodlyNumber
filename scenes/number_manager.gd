@@ -5,8 +5,8 @@ var NumberScn = preload("res://scenes/number.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Temporarly automatically creates numbers.
-	build_numbers(1)
+	EventBus.split.connect(_on_split)
+	build_numbers(2, 4, 3)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,8 +15,9 @@ func _process(delta: float) -> void:
 
 var rng = RandomNumberGenerator.new()
 
-func split(number: Number):
+func _on_split(number: Number):
 	var prime_factor_array = number.prime_factors.duplicate()
+	if(prime_factor_array.size() == 1): return
 	prime_factor_array.shuffle()
 	var childA = NumberScn.instantiate()
 	var childB = NumberScn.instantiate()
@@ -37,14 +38,19 @@ func split(number: Number):
 	
 	number.queue_free()
 
-func build_numbers(amount: int) -> void:
-	for i in amount:
+func build_numbers(amount_of_godly: int, amount_of_ungodly: int, ungodly_number: int) -> void:
+	for i in amount_of_godly:
 		var newNum = NumberScn.instantiate()
-		newNum.randomize_value(500)
+		newNum.randomize_to_godly(500, ungodly_number)
 		
 		add_child(newNum)
-		newNum.global_position.x = 100 #TODO randomize spawn position.
-		newNum.global_position.y = 100
+		newNum.global_position.x = rng.randi_range(0,1000) #TODO randomize spawn position.
+		newNum.global_position.y = 100 + i * 150
+	
+	for i in amount_of_ungodly:
+		var newNum = NumberScn.instantiate()
+		newNum.randomize_to_ungodly(500, ungodly_number)
 		
-		split(newNum)
-		
+		add_child(newNum)
+		newNum.global_position.x = rng.randi_range(0,1000) #TODO randomize spawn position.
+		newNum.global_position.y = 100 + (i+amount_of_godly) * 150

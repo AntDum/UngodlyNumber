@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://wavwqkxu8swx"]
+[gd_scene load_steps=4 format=3 uid="uid://c7hh264r55r2i"]
 
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
-[ext_resource type="Script" path="res://scenes/number_manager.gd" id="2_k5jlv"]
-[ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/ui.tscn" id="3_6vs76"]
+[ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
+[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_6vs76"]
 
 [node name="Level" type="Node2D"]
 
@@ -12,8 +12,6 @@ ui = NodePath("../UI")
 
 [node name="GameTimer" type="Timer" parent="GameManager"]
 one_shot = true
-
-[node name="Numbers" type="Node" parent="."]
 
 [node name="NumberManager" type="Node" parent="."]
 script = ExtResource("2_k5jlv")
