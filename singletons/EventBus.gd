@@ -10,6 +10,8 @@ signal retry
 signal round_started
 signal round_ended
 signal game_started
+signal round_anouncement_finished
+signal round_closure_finished
 
 signal number_killed(is_godly : bool)
 

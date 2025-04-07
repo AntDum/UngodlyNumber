@@ -8,6 +8,7 @@ height = 128.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1u5is"]
 font_size = 50
+outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctckn"]
@@ -129,3 +130,5 @@ libraries = {
 }
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

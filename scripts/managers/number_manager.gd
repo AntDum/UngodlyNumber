@@ -16,16 +16,21 @@ func _ready() -> void:
 	EventBus.split.connect(_on_split)
 	EventBus.round_started.connect(_on_new_round)
 	EventBus.game_started.connect(_on_game_started)
+	EventBus.round_anouncement_finished.connect(_on_announcement_finished)
 
 func _on_game_started():
 	round_number = 0
 
 func _on_new_round():
 	round_number += 1
-	current_ungodly = ungodly_candidates.pick_random()
-	build_numbers(round_number, 1, current_ungodly)
-	EventBus.godly_updated.emit(current_ungodly)
+	_select_new_ungodly()
 
+func _on_announcement_finished() -> void:
+	build_numbers(round_number, 1, current_ungodly)
+
+func _select_new_ungodly() -> void:
+	current_ungodly = ungodly_candidates.pick_random()
+	EventBus.godly_updated.emit(current_ungodly)
 
 func _on_split(number: Number):
 	if not number.number.can_split(): 
@@ -61,9 +66,9 @@ func _build_number(max_number : int, ungodly_number : int, ungoldy : bool) -> vo
 	
 	var number : GodlyNumber = GodlyNumber.new(ungodly_number)
 	number._randomize(max_number, ungoldy)
-	newNum.set_number(number)
 		
 	add_child(newNum)
+	newNum.set_number(number)
 	newNum.global_position = _get_random_position()
 
 func _get_random_position() -> Vector2:

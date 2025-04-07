@@ -10,6 +10,7 @@ class_name Number
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var value: Label = $Value
 
 var change_direction_time = 1.0
 var idle_time = 0.5
@@ -19,6 +20,8 @@ var is_selected = false
 var direction = Vector2.ZERO
 var time_since_change = 0.0
 
+var tween : Tween
+
 var number : GodlyNumber
 
 func _ready() -> void:
@@ -26,8 +29,8 @@ func _ready() -> void:
 	var label_settings = LabelSettings.new()
 	label_settings.font_size = 50
 	label_settings.set_outline_color(Color.FIREBRICK)
-	label_settings.outline_size = 0
-	$Value.set_label_settings(label_settings)
+	label_settings.outline_size = 1
+	value.set_label_settings(label_settings)
 		
 	_change_direction()
 
@@ -80,12 +83,31 @@ func _on_selection(number: Number):
 
 func _get_selected():
 	is_selected = true
-	$Value.get_label_settings().outline_size = 15
+	value.get_label_settings().outline_size = 15
+	value.get_label_settings().set_outline_color(Color.FIREBRICK)
+	animation_player.speed_scale = 2
 
 func _get_unselected():
 	is_selected = false
-	$Value.get_label_settings().outline_size = 0
+	value.get_label_settings().outline_size = 1
+	value.get_label_settings().set_outline_color(Color.BLACK)
+	animation_player.speed_scale = 1
 
 func set_number(number: GodlyNumber) -> void:
 	self.number = number
 	$Value.text = str(self.number.value)
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if tween:
+		tween.kill()
+	# Crée le tween avec une interpolation élastique pour un effet rebondissant
+	tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	# Squash : on étire l'axe X et on compresse l'axe Y
+	tween.tween_property(self, "scale:x", 1.1, 0.05)
+	tween.tween_property(self, "scale:y", 0.9, 0.05)
+	# Retour à l'échelle normale (1,1)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.05)
+
+func _on_area_2d_mouse_exited() -> void:
+	pass # Replace with function body.

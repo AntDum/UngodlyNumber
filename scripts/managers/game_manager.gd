@@ -17,17 +17,26 @@ func _ready() -> void:
 	EventBus.selected.connect(_on_number_selected)
 	EventBus.kill.connect(_on_kill_number)
 	EventBus.retry.connect(start_game)
+	EventBus.round_anouncement_finished.connect(_on_round_announcement_finished)
+	EventBus.round_closure_finished.connect(start_round)
 
 func _process(delta: float) -> void:
-	EventBus.timer_updated.emit(game_timer.time_left, game_time)
+	if is_round_running:
+		EventBus.timer_updated.emit(game_timer.time_left, game_time)
 
 func start_game() -> void:
 	EventBus.game_started.emit()
 	score = 0
 	start_round()
 
+func retry() -> void:
+	EventBus.game_started.emit()
+	score = 0
+
 func start_round() -> void:
 	EventBus.round_started.emit()
+
+func _on_round_announcement_finished() -> void:
 	game_timer.start(game_time)
 	is_round_running = true
 
@@ -40,7 +49,7 @@ func end_round() -> void:
 func won_round() -> void:
 	$RoundWonSoundPlayer.play()
 	end_round()
-	start_round()
+	EventBus.round_ended.emit()
 
 func lost_round() -> void:
 	$RoundLostSoundPlayer.play()

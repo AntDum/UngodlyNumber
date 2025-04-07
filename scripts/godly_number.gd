@@ -14,7 +14,6 @@ var rng = RandomNumberGenerator.new()
 
 func _init(ungodly : int) -> void:
 	self.current_ungodly = ungodly
-	prints("length", PRIME_WEIGHT.size())
 
 func _randomize(max_value: int, use_ungodly: bool) -> void:
 	is_ungodly = use_ungodly
