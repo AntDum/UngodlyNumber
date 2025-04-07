@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Number
 
 @export var speed = 100
-@export var speed_following = 250
+@export var speed_following = 1000
 @export var min_change_direction_time = 1.5
 @export var max_change_direction_time = 3.0
 @export var min_idle_time = 0.5
@@ -16,6 +16,7 @@ var change_direction_time = 1.0
 var idle_time = 0.5
 var is_idle := false
 var is_selected = false
+var grabbed = false
 
 var direction = Vector2.ZERO
 var time_since_change = 0.0
@@ -37,14 +38,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	time_since_change += delta
 
-	if not is_selected:
+	if not grabbed:
 		if ray_cast_2d.is_colliding() or time_since_change >= change_direction_time:
 			_change_direction()
 			time_since_change = 0.0
 		velocity = direction * speed * delta * 60
 	else:
 		_follow_mouse()
-		if global_position.distance_to(get_global_mouse_position()) > 50:
+		if global_position.distance_to(get_global_mouse_position()) > 20:
 			velocity = direction * speed_following * delta * 60
 		else:
 			velocity = Vector2.ZERO
@@ -73,7 +74,14 @@ func _follow_mouse() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
+			grabbed = true
+			_squich_effect()
 			EventBus.selected.emit(self)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if not event.pressed:
+			grabbed = false
 
 func _on_selection(number: Number):
 	if number == self:
@@ -97,8 +105,11 @@ func set_number(number: GodlyNumber) -> void:
 	self.number = number
 	$Value.text = str(self.number.value)
 
-
 func _on_area_2d_mouse_entered() -> void:
+	_squich_effect()
+
+
+func _squich_effect() -> void:
 	if tween:
 		tween.kill()
 	# Crée le tween avec une interpolation élastique pour un effet rebondissant
@@ -108,6 +119,3 @@ func _on_area_2d_mouse_entered() -> void:
 	tween.tween_property(self, "scale:y", 0.9, 0.05)
 	# Retour à l'échelle normale (1,1)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.05)
-
-func _on_area_2d_mouse_exited() -> void:
-	pass # Replace with function body.
