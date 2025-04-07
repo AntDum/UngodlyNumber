@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://wavwqkxu8swx"]
 
-[ext_resource type="Script" uid="uid://c3354xdut8i3c" path="res://scripts/stat_manager.gd" id="1_kl8ac"]
-[ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/game_manager.gd" id="1_uhqny"]
-[ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scenes/number_manager.gd" id="2_k5jlv"]
-[ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/ui.tscn" id="3_6vs76"]
+[ext_resource type="Script" uid="uid://c3354xdut8i3c" path="res://scripts/managers/stat_manager.gd" id="1_kl8ac"]
+[ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/managers/game_manager.gd" id="1_uhqny"]
+[ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scripts/managers/number_manager.gd" id="2_k5jlv"]
+[ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/Ui/ui.tscn" id="3_6vs76"]
 [ext_resource type="AudioStream" uid="uid://bpfa6hrt8agd7" path="res://assets/win.wav" id="5_2eouu"]
 [ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
 [ext_resource type="AudioStream" uid="uid://dy3mwxathtykb" path="res://assets/splitted.wav" id="6_4qegb"]
 [ext_resource type="AudioStream" uid="uid://djac6np0lv31f" path="res://assets/gameover.wav" id="6_ax7ne"]
-[ext_resource type="PackedScene" uid="uid://dqvfsjv00h1fk" path="res://scenes/lost.tscn" id="6_dke22"]
+[ext_resource type="PackedScene" uid="uid://dqvfsjv00h1fk" path="res://scenes/Ui/lost.tscn" id="6_dke22"]
 [ext_resource type="AudioStream" uid="uid://dvla4otnh4757" path="res://assets/kill.wav" id="6_rccsh"]
 [ext_resource type="AudioStream" uid="uid://bx26xpgesrpte" path="res://assets/notSplittable.wav" id="7_faw0r"]
 
@@ -26,10 +26,9 @@ texture = ExtResource("5_qifjx")
 [node name="StatManager" type="Node" parent="."]
 script = ExtResource("1_kl8ac")
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_uhqny")
 game_time = 7.0
-ui = NodePath("../UI")
 
 [node name="GameTimer" type="Timer" parent="GameManager"]
 one_shot = true
@@ -82,9 +81,8 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBorder/BottomBorder"]
 shape = SubResource("WorldBoundaryShape2D_6vs76")
 
-[node name="NumberManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
+[node name="NumberManager" type="Node" parent="."]
 script = ExtResource("2_k5jlv")
-ui = NodePath("../UI")
 
 [node name="SplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
 stream = ExtResource("6_4qegb")
@@ -104,9 +102,8 @@ position = Vector2(549, 360)
 
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
 
-[node name="Lost" parent="." node_paths=PackedStringArray("stat_manager", "game_manager") instance=ExtResource("6_dke22")]
+[node name="Lost" parent="." node_paths=PackedStringArray("stat_manager") instance=ExtResource("6_dke22")]
 visible = false
 stat_manager = NodePath("../StatManager")
-game_manager = NodePath("../GameManager")
 
 [connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_game_timer_timeout"]

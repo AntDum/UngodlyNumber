@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 @export var stat_manager: StatManager
-@export var game_manager: GameManager
 
 func _ready() -> void:
 	EventBus.lost.connect(_on_lost)
@@ -11,7 +10,7 @@ func _on_lost() -> void:
 	show_layout()
 
 func _update_layout() -> void:
-	%score_label.text = str(game_manager.score)
+	%score_label.text = str(stat_manager.score)
 	%round_label.text = str(stat_manager.round_played)
 	%killed_label.text = str(stat_manager.ungodly_killed)
 

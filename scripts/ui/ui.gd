@@ -8,6 +8,11 @@ class_name UI
 @onready var score_label: AnimatedLabel = %ScoreLabel
 @onready var impie_label: Label = %ImpieLabel
 
+func _ready() -> void:
+	EventBus.score_updated.connect(set_score)
+	EventBus.timer_updated.connect(set_time)
+	EventBus.godly_updated.connect(set_impie)
+
 func set_time(current: float, max: float) -> void:
 	timer_label.text = "%s s" % str(roundf(current * 10) / 10)
 	timer_pb.value = ((current / max) * 100)

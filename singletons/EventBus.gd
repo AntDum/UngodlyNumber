@@ -12,3 +12,7 @@ signal round_ended
 signal game_started
 
 signal number_killed(is_godly : bool)
+
+signal score_updated(score: int)
+signal godly_updated(godly: int)
+signal timer_updated(time: float, max_time: float)

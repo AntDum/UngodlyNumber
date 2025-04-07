@@ -2,8 +2,8 @@ extends Node
 class_name GameManager
 
 @export var game_time : float = 10
-
-@export var ui : UI
+@export var kill_score: int = 100
+@export var kill_penalty: int = 50
 
 @onready var game_timer: Timer = $GameTimer
 
@@ -19,8 +19,7 @@ func _ready() -> void:
 	EventBus.retry.connect(start_game)
 
 func _process(delta: float) -> void:
-	if ui:
-		ui.set_time(game_timer.time_left, game_time) 
+	EventBus.timer_updated.emit(game_timer.time_left, game_time)
 
 func start_game() -> void:
 	EventBus.game_started.emit()
@@ -58,7 +57,7 @@ func kill_all_number() -> void:
 func remaining_ungodly() -> int:
 	var tot = 0
 	for number in get_tree().get_nodes_in_group("numbers"):
-		if number.is_ungodly:
+		if number.number.is_ungodly:
 			tot += 1
 	return tot
 
@@ -67,8 +66,9 @@ func _on_kill_number() -> void:
 	if not selected: return
 	$OnKillSoundPlayer.play()
 	var remaining_ungodly = remaining_ungodly()
-	EventBus.number_killed.emit(not selected.is_ungodly)
-	if selected.is_ungodly:
+	var is_ungodly = selected.number.is_ungodly
+	EventBus.number_killed.emit(not is_ungodly)
+	if is_ungodly:
 		score += 100
 		remaining_ungodly -= 1
 	else:
@@ -83,13 +83,11 @@ func _on_number_selected(number : Number) -> void:
 	if selected == number:
 		EventBus.split.emit(number)
 	else:
-		print("New selection : ", number.value)
 		selected = number
 
 func _setter_score(value) -> void:
 	score = value
-	if ui:
-		ui.set_score(value)
+	EventBus.score_updated.emit(value)
 
 
 func _on_game_timer_timeout() -> void:

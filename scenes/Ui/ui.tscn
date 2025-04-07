@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dq0wpoywm1r6o"]
 
-[ext_resource type="Script" uid="uid://phj4j4mi5ipa" path="res://scripts/ui.gd" id="1_x4jx1"]
-[ext_resource type="Script" uid="uid://b12rg5o8m1w70" path="res://scenes/Components/animated_label.gd" id="2_yev5y"]
+[ext_resource type="Script" uid="uid://phj4j4mi5ipa" path="res://scripts/ui/ui.gd" id="1_x4jx1"]
+[ext_resource type="Script" uid="uid://b12rg5o8m1w70" path="res://scenes/Ui/Components/animated_label.gd" id="2_yev5y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x4jx1"]
 font_size = 32

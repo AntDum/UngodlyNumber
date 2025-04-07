@@ -5,11 +5,13 @@ var killed = 0
 var ungodly_killed = 0
 var godly_killed = 0
 var round_played = 0
+var score = 0
 
 func _ready() -> void:
 	EventBus.number_killed.connect(_on_number_killed)
 	EventBus.game_started.connect(_on_game_started)
 	EventBus.round_started.connect(_on_round_started)
+	EventBus.score_updated.connect(_on_score_updated)
 	
 func _on_number_killed(is_godly : bool) -> void:
 	killed += 1
@@ -26,3 +28,6 @@ func _on_game_started() -> void:
 	
 func _on_round_started() -> void:
 	round_played += 1
+
+func _on_score_updated(value : int) -> void:
+	score = value
