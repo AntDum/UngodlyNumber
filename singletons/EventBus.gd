@@ -2,7 +2,7 @@ extends Node
 
 signal selected(number : Number)
 signal split(number: Number)
-signal kill
+signal kill(number: Number)
 
 signal lost
 signal retry

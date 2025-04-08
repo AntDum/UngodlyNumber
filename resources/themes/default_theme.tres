@@ -3,7 +3,9 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0oxu6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k5xl"]
-bg_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.8, 0.8, 0.8, 0.403922)
+border_blend = true
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -22,15 +24,18 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ymaj"]
-bg_color = Color(0.679027, 0, 0, 1)
+bg_color = Color(0.678431, 0, 0, 0.545098)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [resource]
-Button/font_sizes/font_size = 20
+Button/font_sizes/font_size = 32
 Button/styles/focus = SubResource("StyleBoxEmpty_0oxu6")
-Button/styles/normal = SubResource("StyleBoxFlat_0k5xl")
+Button/styles/hover = SubResource("StyleBoxEmpty_0oxu6")
+Button/styles/normal = SubResource("StyleBoxEmpty_0oxu6")
+Button/styles/pressed = SubResource("StyleBoxEmpty_0oxu6")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_0k5xl")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_0oxu6")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_1ymaj")

@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://dr4pjfyik17bx" path="res://scripts/managers/game_manager.gd" id="1_uhqny"]
 [ext_resource type="Script" uid="uid://b67j40yg6h0jh" path="res://scripts/managers/number_manager.gd" id="2_k5jlv"]
 [ext_resource type="PackedScene" uid="uid://dq0wpoywm1r6o" path="res://scenes/Ui/ui.tscn" id="3_6vs76"]
-[ext_resource type="AudioStream" uid="uid://bpfa6hrt8agd7" path="res://assets/win.wav" id="5_2eouu"]
-[ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/blackboard.png" id="5_qifjx"]
-[ext_resource type="AudioStream" uid="uid://dy3mwxathtykb" path="res://assets/splitted.wav" id="6_4qegb"]
-[ext_resource type="AudioStream" uid="uid://djac6np0lv31f" path="res://assets/gameover.wav" id="6_ax7ne"]
+[ext_resource type="AudioStream" uid="uid://bpfa6hrt8agd7" path="res://assets/sounds/win.wav" id="5_2eouu"]
+[ext_resource type="Texture2D" uid="uid://bnli8vd25t7wb" path="res://assets/sprites/blackboard.png" id="5_qifjx"]
+[ext_resource type="AudioStream" uid="uid://dy3mwxathtykb" path="res://assets/sounds/splitted.wav" id="6_4qegb"]
+[ext_resource type="AudioStream" uid="uid://djac6np0lv31f" path="res://assets/sounds/gameover.wav" id="6_ax7ne"]
 [ext_resource type="PackedScene" uid="uid://dqvfsjv00h1fk" path="res://scenes/Ui/lost.tscn" id="6_dke22"]
-[ext_resource type="AudioStream" uid="uid://dvla4otnh4757" path="res://assets/kill.wav" id="6_rccsh"]
-[ext_resource type="AudioStream" uid="uid://bx26xpgesrpte" path="res://assets/notSplittable.wav" id="7_faw0r"]
+[ext_resource type="AudioStream" uid="uid://dvla4otnh4757" path="res://assets/sounds/kill.wav" id="6_rccsh"]
+[ext_resource type="AudioStream" uid="uid://bx26xpgesrpte" path="res://assets/sounds/notSplittable.wav" id="7_faw0r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vs76"]
 
@@ -41,11 +41,6 @@ bus = &"SFX"
 [node name="RoundLostSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("6_ax7ne")
 volume_db = -13.929
-bus = &"SFX"
-
-[node name="OnKillSoundPlayer" type="AudioStreamPlayer" parent="GameManager"]
-stream = ExtResource("6_rccsh")
-volume_db = -8.099
 bus = &"SFX"
 
 [node name="MapBorder" type="Node2D" parent="."]
@@ -84,6 +79,11 @@ shape = SubResource("WorldBoundaryShape2D_6vs76")
 [node name="NumberManager" type="Node" parent="."]
 script = ExtResource("2_k5jlv")
 
+[node name="OnKillSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
+stream = ExtResource("6_rccsh")
+volume_db = -8.099
+bus = &"SFX"
+
 [node name="SplitSoundPlayer" type="AudioStreamPlayer" parent="NumberManager"]
 stream = ExtResource("6_4qegb")
 volume_db = -4.0
@@ -103,7 +103,6 @@ position = Vector2(549, 360)
 [node name="UI" parent="." instance=ExtResource("3_6vs76")]
 
 [node name="Lost" parent="." node_paths=PackedStringArray("stat_manager") instance=ExtResource("6_dke22")]
-visible = false
 stat_manager = NodePath("../StatManager")
 
 [connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_game_timer_timeout"]

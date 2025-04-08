@@ -1,19 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cskfa5ihbuu4g"]
+[gd_scene load_steps=8 format=3 uid="uid://cskfa5ihbuu4g"]
 
 [ext_resource type="Script" uid="uid://dls66jxadmxj1" path="res://scripts/number.gd" id="1_1u5is"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1u5is"]
-radius = 30.0
-height = 128.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctckn"]
+radius = 20.0
+height = 100.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1u5is"]
 font_size = 50
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctckn"]
-radius = 14.0
-height = 54.0
 
 [sub_resource type="Animation" id="Animation_ctckn"]
 length = 0.001
@@ -103,7 +99,7 @@ script = ExtResource("1_1u5is")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_1u5is")
+shape = SubResource("CapsuleShape2D_ctckn")
 
 [node name="Value" type="Label" parent="."]
 offset_left = -172.0
@@ -129,6 +125,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_1283t")
 }
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="resized" from="Value" to="." method="_on_value_resized"]

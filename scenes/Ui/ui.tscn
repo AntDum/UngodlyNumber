@@ -1,7 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq0wpoywm1r6o"]
+[gd_scene load_steps=12 format=3 uid="uid://dq0wpoywm1r6o"]
 
 [ext_resource type="Script" uid="uid://phj4j4mi5ipa" path="res://scripts/ui/ui.gd" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://b12rg5o8m1w70" path="res://scenes/Ui/Components/animated_label.gd" id="2_yev5y"]
+[ext_resource type="AudioStream" uid="uid://c0x8ah6rx8vi0" path="res://assets/sounds/click4.ogg" id="3_aujml"]
+[ext_resource type="AudioStream" uid="uid://co0p77vnxhvp3" path="res://assets/sounds/chalk-on-blackboard.mp3" id="4_tsrkt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ja3lj"]
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_aujml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopRightContainer/ImpieLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ja3lj"]
 resource_name = "annouce_round"
@@ -9,19 +30,19 @@ length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer2:position")
+tracks/0/path = NodePath("TopRightContainer:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.333333, 0.433333, 1.86667, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1.74111, 1.74111, 1),
+"transitions": PackedFloat32Array(1, 1, 1.74111, 1.36605, 1),
 "update": 0,
 "values": [Vector2(398, 0), Vector2(398, -400), Vector2(104, 168), Vector2(104, 168), Vector2(398, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer2/ImpieLabel:visible_ratio")
+tracks/1/path = NodePath("TopRightContainer/ImpieLabel:visible_ratio")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,12 +54,12 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer2/ImpieLabel:theme_override_font_sizes/font_size")
+tracks/2/path = NodePath("TopRightContainer/ImpieLabel:theme_override_font_sizes/font_size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.386648, 0.466667, 1.87667, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 0.615572, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 0.757858, 1),
 "update": 0,
 "values": [32, 32, 64, 64, 32]
 }
@@ -49,9 +70,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(2.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.333333, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"_update_ungodly"
+}, {
 "args": [],
 "method": &"_round_announcement_finished"
 }]
@@ -59,7 +83,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MarginContainer2:size")
+tracks/4/path = NodePath("TopRightContainer:size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -71,77 +95,26 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HBoxContainer/TimerPb:value")
+tracks/5/path = NodePath("TopRightContainer/ImpieLabel:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
-[sub_resource type="Animation" id="Animation_aujml"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(409, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer2/ImpieLabel:visible_ratio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer2/ImpieLabel:theme_override_font_sizes/font_size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [32]
+"values": [false, true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MarginContainer2:size")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(231, 59)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HBoxContainer/TimerPb:value")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [100.0]
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ChalkSoundPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.480502, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsrkt"]
@@ -150,51 +123,81 @@ _data = {
 &"annouce_round": SubResource("Animation_ja3lj")
 }
 
+[sub_resource type="Animation" id="Animation_rjvug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 420)]
+}
+
+[sub_resource type="Animation" id="Animation_tsrkt"]
+resource_name = "shake"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 420), Vector2(0, 422), Vector2(0, 418)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03p2l"]
+_data = {
+&"RESET": SubResource("Animation_rjvug"),
+&"shake": SubResource("Animation_tsrkt")
+}
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_x4jx1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="BottomContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -60.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 15
-alignment = 1
+pivot_offset = Vector2(320, 30)
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="TimerLabel" type="Label" parent="HBoxContainer"]
+[node name="TimerPb" type="ProgressBar" parent="BottomContainer"]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-text = "30 s"
-horizontal_alignment = 1
-
-[node name="TimerPb" type="ProgressBar" parent="HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 4.0
 value = 100.0
+rounded = true
 show_percentage = false
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="TimerLabel" type="Label" parent="BottomContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+size_flags_horizontal = 6
+text = "7 s"
+label_settings = SubResource("LabelSettings_ja3lj")
+horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Erase"
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TopLeftContainer" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 10
@@ -202,7 +205,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+[node name="ScoreLabel" type="Label" parent="TopLeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -210,22 +213,26 @@ text = "0"
 script = ExtResource("2_yev5y")
 metadata/_custom_type_script = "uid://b12rg5o8m1w70"
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="TopRightContainer" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -231.0
-offset_bottom = 59.0
+offset_left = -245.594
+offset_top = -393.056
+offset_right = -3.59399
+offset_bottom = -334.056
 grow_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ImpieLabel" type="Label" parent="MarginContainer2"]
+[node name="ImpieLabel" type="Label" parent="TopRightContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+text = "erase the 7"
 visible_characters = 0
 visible_ratio = 0.0
 
@@ -234,4 +241,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_tsrkt")
 }
 
-[connection signal="pressed" from="HBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
+[node name="TimerAP" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_03p2l")
+}
+
+[node name="ClickSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_aujml")
+volume_db = -16.94
+pitch_scale = 2.7
+bus = &"SFX"
+
+[node name="ChalkSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tsrkt")
+volume_db = 4.435
+pitch_scale = 1.31
+bus = &"SFX"
