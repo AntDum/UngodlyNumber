@@ -1,6 +1,5 @@
 extends Node
 
-signal selected(number : Number)
 signal split(number: Number)
 signal kill(number: Number)
 

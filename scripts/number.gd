@@ -28,11 +28,9 @@ var tween : Tween
 var number : GodlyNumber
 
 func _on_tree_entered() -> void:
-	EventBus.selected.connect(_on_selection)
 	EventBus.retry.connect(_on_retry)
 
 func _on_tree_exiting() -> void:
-	EventBus.selected.disconnect(_on_selection)
 	EventBus.retry.disconnect(_on_retry)
 
 
@@ -84,9 +82,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if event is InputEventMouseButton:
 		if event.pressed and not event.double_click:
 			if event.button_index == MOUSE_BUTTON_LEFT:
+				_get_selected()
 				grabbed = true
 				_squich_effect()
-				EventBus.selected.emit(self)
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				EventBus.kill.emit(self)
 		elif event.double_click:
@@ -95,6 +93,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if not event.pressed:
+			_get_unselected()
 			grabbed = false
 		else:
 			var evLocal = make_input_local(event)
@@ -108,21 +107,12 @@ func kill() -> void:
 	tween.tween_property(self, "scale:y", 0, 0.15)
 	tween.tween_callback(queue_free)
 
-func _on_selection(number: Number):
-	if number == self:
-		_get_selected()
-	else:
-		_get_unselected()
-	
-
 func _get_selected():
-	is_selected = true
 	label_settings.outline_size = 15
 	label_settings.outline_color = Color.FIREBRICK
 	animation_player.speed_scale = 2
 
 func _get_unselected():
-	is_selected = false
 	label_settings.outline_size = 1
 	label_settings.outline_color = Color.BLACK
 	animation_player.speed_scale = 1
