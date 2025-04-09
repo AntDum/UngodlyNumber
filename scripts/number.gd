@@ -13,12 +13,17 @@ class_name Number
 @onready var value: Label = $Value
 var label_settings : LabelSettings
 
+enum State {
+	IDLE,
+	MOVING,
+	GRABBED,
+	KILLED
+}
+
+var current_state : State = State.IDLE
+
 var change_direction_time = 1.0
 var idle_time = 0.5
-var is_idle := false
-var is_selected = false
-var grabbed = false
-var killed = false
 
 var direction = Vector2.ZERO
 var time_since_change = 0.0
@@ -46,17 +51,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	time_since_change += delta
 
-	if not grabbed:
-		if ray_cast_2d.is_colliding() or time_since_change >= change_direction_time:
-			_change_direction()
-			time_since_change = 0.0
-		velocity = direction * speed * delta * 60
-	else:
-		_follow_mouse()
-		if global_position.distance_to(get_global_mouse_position()) > 20:
-			velocity = direction * speed_following * delta * 60
-		else:
-			velocity = Vector2.ZERO
+	match current_state:
+		State.IDLE, State.MOVING:
+			if ray_cast_2d.is_colliding() or time_since_change >= change_direction_time:
+				_change_direction()
+				time_since_change = 0.0
+			velocity = direction * speed * delta * 60
+		State.GRABBED:
+			_follow_mouse()
+			if global_position.distance_to(get_global_mouse_position()) > 20:
+				velocity = direction * speed_following * delta * 60
+			else:
+				velocity = Vector2.ZERO
 	
 	if velocity.length() > 1:
 		animation_player.play("walk")
@@ -68,23 +74,25 @@ func _physics_process(delta: float) -> void:
 func _change_direction() -> void:
 	change_direction_time = randf_range(min_change_direction_time, max_change_direction_time)
 	idle_time = randf_range(min_idle_time, max_idle_time)
-	if is_idle:
-		direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-		ray_cast_2d.target_position = direction * speed / 2
-	else:
-		direction = Vector2.ZERO
-	is_idle = not is_idle
+	match current_state:
+		State.MOVING:
+			direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+			ray_cast_2d.target_position = direction * speed / 2
+			current_state = State.IDLE
+		State.IDLE:
+			direction = Vector2.ZERO
+			current_state = State.MOVING
 
 func _follow_mouse() -> void:
 	direction = global_position.direction_to(get_global_mouse_position())
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if is_killed(): return
 	if event is InputEventMouseButton:
 		if event.pressed and not event.double_click:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				_get_selected()
-				grabbed = true
-				_squich_effect()
+				_squish_effect()
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				EventBus.kill.emit(self)
 		elif event.double_click:
@@ -94,12 +102,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if not event.pressed:
 			_get_unselected()
-			grabbed = false
-		else:
-			var evLocal = make_input_local(event)
+
+func is_killed() -> bool:
+	return current_state == State.KILLED
 
 func kill() -> void:
-	killed = true
+	current_state = State.KILLED
 	if tween:
 		tween.kill()
 		
@@ -108,11 +116,13 @@ func kill() -> void:
 	tween.tween_callback(queue_free)
 
 func _get_selected():
+	current_state = State.GRABBED
 	label_settings.outline_size = 15
 	label_settings.outline_color = Color.FIREBRICK
 	animation_player.speed_scale = 2
 
 func _get_unselected():
+	current_state = State.IDLE
 	label_settings.outline_size = 1
 	label_settings.outline_color = Color.BLACK
 	animation_player.speed_scale = 1
@@ -127,16 +137,14 @@ func illuminate() -> void:
 func _on_retry() -> void:
 	kill()
 
-func set_number(number: GodlyNumber) -> void:
-	self.number = number
+func set_number(new_number: GodlyNumber) -> void:
+	number = new_number
 	$Value.text = str(self.number.value)
 
 func _on_area_2d_mouse_entered() -> void:
-	_squich_effect()
+	_squish_effect()
 
-
-func _squich_effect() -> void:
-	if killed: return
+func _squish_effect() -> void:
 	if tween:
 		tween.kill()
 	# Crée le tween avec une interpolation élastique pour un effet rebondissant

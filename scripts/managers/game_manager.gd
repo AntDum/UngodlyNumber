@@ -3,7 +3,7 @@ class_name GameManager
 
 @export var game_time : float = 10
 @export var kill_score: int = 100
-@export var kill_penalty: int = 200
+@export var kill_penalty: int = 100
 
 @onready var game_timer: Timer = $GameTimer
 
@@ -68,7 +68,7 @@ func kill_all_number() -> void:
 func remaining_ungodly() -> int:
 	var tot = 0
 	for number:Number in get_tree().get_nodes_in_group("numbers"):
-		if number.number.is_ungodly and not number.killed:
+		if number.number.is_ungodly and not number.is_killed():
 			tot += 1
 	return tot
 
